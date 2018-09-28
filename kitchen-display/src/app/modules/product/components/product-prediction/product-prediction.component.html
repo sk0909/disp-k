@@ -1,0 +1,18 @@
+
+<a routerLink="/product"><- Back to Add Products</a>
+<div>
+  <form [formGroup]="predictionForm">
+  Product name:<br>
+  <select formControlName="product_Id" name="product_Id">
+  <option *ngFor="let product of products" [value]="product._id">{{product.name | uppercase }}</option>
+  </select>
+  <label *ngIf="products?.length==0">No Product to choose ,Please create a product first</label>
+  <label *ngIf="predictionForm.get('product_Id').dirty && !(predictionForm.get('product_Id').valid)">*product required</label>
+  <br>
+  Prediction Value:<br>
+  <input formControlName="predictionValue" type="text" name="predictionValue">
+  <label *ngIf="predictionForm.get('predictionValue').dirty && !(predictionForm.get('predictionValue').valid)">*prediction value required (must be in digits)</label>
+  <br><br>
+  <input [disabled]="!predictionForm.valid" (click)="setPredictionValue(predictionForm.value.product_Id, predictionForm.value.predictionValue)" type="button" value="Submit">
+  </form>
+</div>

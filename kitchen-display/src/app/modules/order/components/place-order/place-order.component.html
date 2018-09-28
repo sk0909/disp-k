@@ -1,0 +1,31 @@
+<div>
+    <form [formGroup]="orderForm">
+    Product name:<br>
+    <select formControlName="product_Id" name="product_Id">
+    <option *ngFor="let product of products" [value]="product._id">{{product.name | uppercase}}</option>
+    </select>
+    <label *ngIf="products?.length==0">No Product to choose ,Please create a product first</label>
+    <label *ngIf="orderForm.get('product_Id').dirty && !(orderForm.get('product_Id').valid)">*product required</label>
+    <br>
+    Quantity:<br>
+    <input formControlName="quantity" type="number" name="Quantity">
+    <label *ngIf="orderForm.get('quantity').dirty && !(orderForm.get('quantity').valid)">*quantity required</label>
+    <br><br>
+    <fieldset class="form-group" formGroupName="user">
+    Phone Number:<br>
+    <input formControlName="phoneNumber" placeholder="*required" type="text" name="Phone number">
+    <label *ngIf="orderForm.get('user.phoneNumber').dirty && !(orderForm.get('user.phoneNumber').valid)">*phone number required(min. length should be 10)</label>
+    <br><br>
+    First Name:<br>
+    <input formControlName="firstName" type="text" name="First Name">
+   
+    <br><br>
+    Last Name:<br>
+    <input formControlName="lastName" type="text" name="Last Name">
+   
+    <br><br>
+    
+    </fieldset>
+    <input [disabled]="!orderForm.valid"  (click)="createOrder()" type="button" value="Submit">
+    </form>
+</div>

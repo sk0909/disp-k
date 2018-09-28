@@ -1,0 +1,28 @@
+<button [disabled]="orders?.length==0" (click)="generateReport();" value="report">Report</button>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Created-till now</th>
+    <th>Predicted</th>
+    <th>Status</th>
+
+  </tr>
+
+  <tr *ngFor="let order of orders">
+    <td>{{order.product_Id.name}}</td>
+    <td>{{order.quantity}}</td>
+    <td>{{order.created_till_now}}</td>
+    <td *ngIf="order">
+      <ng-container *ngIf="order.product_Id">
+        <ng-container *ngIf="order.product_Id.prediction">{{order.product_Id.prediction.prediction[order.product_Id.prediction.__v].value}}</ng-container>
+      </ng-container>
+    </td>
+    <td>
+      <button [disabled]="order.quantity == 0" (click)="orderMarkCompleted(order.product_Id._id,order.quantity);" value="status">Done</button>
+    </td>
+  </tr>
+
+</table>
+
+  <h1 *ngIf="orders?.length==0" class="center"> No order to show</h1>

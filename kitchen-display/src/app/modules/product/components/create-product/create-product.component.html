@@ -1,0 +1,16 @@
+<div>
+    <form [formGroup]="productForm">
+        Product name:
+        <br>
+        <input formControlName="name" name="product_Id">
+        <label *ngIf="productForm.get('name').dirty && !(productForm.get('name').valid)">*product name required</label>
+        <br> Description:
+        <br>
+        <textarea name="description" formControlName="description">Enter text here...</textarea>
+        <br>
+        <br>
+        <input [disabled]="!productForm.valid" (click)="createProduct()" type="button" value="Submit">
+    </form>
+</div>
+
+<a routerLink="/product/prediction">Set Product Prediction</a>
