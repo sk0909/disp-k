@@ -1,1 +1,1 @@
-# disp-k
+# A sample app
